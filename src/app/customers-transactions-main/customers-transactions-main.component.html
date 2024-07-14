@@ -1,0 +1,50 @@
+
+
+<div class="bg-dark overflow-hidden vh-100">
+<div class="container">
+    <h1 class="mt-2 text-white">Customers Transactions Table</h1>
+<div class="d-flex justify-content-start gap-2 align-items-center flex-wrap">
+<div class="form-floating mb-3 w-25">
+  <input type="text" [(ngModel)]="customerNameSearch" class="form-control" id="userSearchForCustomer" placeholder="Search For Customer Name">
+  <label for="userSearchForCustomer">Search For Customer Name:</label>
+</div>
+
+<div class="form-floating mb-3 w-25">
+  <input type="number" [(ngModel)]="transactionSearch" class="form-control" id="userSearchForTransaction" placeholder="Search For Transaction Amount" [ngStyle]="{'color': transactionSearch == 0 ? 'white' : 'black'}">
+  <label for="userSearchForTransaction">Search For Transaction Amount:</label>
+</div>   
+</div>
+<div class="row">
+<div class="col-md-6">
+    <table class="table text-center">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Customer</th>
+      <th scope="col">Transaction Amount</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+     @for (transaction of Transactions|transactionSearch:transactionSearch:customerNameSearch:Customers;track transaction){ 
+    <tr>
+       
+            <th scope="row">{{transaction.id}}</th>
+      <td class="pointer" (click)="TakeCustomerName($event)">{{transaction.customer_id|customerName:Customers}}</td>
+      <td>{{transaction.amount|currency}}</td>
+      <td>{{transaction.date}}</td>
+     
+    </tr>
+    }
+  </tbody>
+</table>
+</div>
+<div class="col-md-6">
+<app-chart-component></app-chart-component>
+</div>
+</div>
+<div>
+  <p class="text-white fw-bolder" [ngStyle]="{'animation': 'flash 1s infinite'}">Click on Customer Name To See All Transactions per Date on Graph</p>
+</div>
+</div>
+</div>
