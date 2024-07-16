@@ -8,7 +8,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CustomerNamePipe implements PipeTransform {
 
   transform(customerId:number, Customers:Customers[]): string {
-    return Customers.find(c => c.id === customerId.toString())?.name || 'Unknown';
+    return Customers.find(c => c.id == customerId.toString())?.name || 'Unknown';
   }
 
 }

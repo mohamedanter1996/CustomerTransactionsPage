@@ -1,3 +1,4 @@
+import { transition } from '@angular/animations';
 import { CustomerNamePipe } from '../pipes/customer-name.pipe';
 import { TransactionSearchPipe } from '../pipes/transaction-search.pipe';
 import { Transactions } from './../interfaces/transactions';
@@ -39,7 +40,7 @@ export class CustomersTransactionsMainComponent implements OnInit {
     this._CustomersTransactionsServiceService.getCustomersData().subscribe({
       next: (response) => {
         console.log(response);
-        this.Customers = response;
+        this.Customers = response.customers;
       },
       error: (error) => {
         console.log(error);
@@ -49,7 +50,7 @@ export class CustomersTransactionsMainComponent implements OnInit {
     this._CustomersTransactionsServiceService.getTransactionsData().subscribe({
       next: (response) => {
         console.log(response);
-        this.Transactions = response;
+        this.Transactions = response.transactions;
       },
       error: (error) => {
         console.log(error);
@@ -74,7 +75,7 @@ export class CustomersTransactionsMainComponent implements OnInit {
   public GetCustomerNameId(customerName: string): string {
     var CustomerId: string = '';
     for (let i = 0; i < this.Customers.length; i++) {
-      if (this.Customers[i].name === customerName) {
+      if (this.Customers[i].name == customerName) {
         CustomerId = this.Customers[i].id;
         break;
       }
@@ -87,7 +88,7 @@ export class CustomersTransactionsMainComponent implements OnInit {
   ): CustomerTransactionsDates[] {
     let CustomerTransactionsDates: CustomerTransactionsDates[] = [];
     for (let index = 0; index < this.Transactions.length; index++) {
-      if (this.Transactions[index].customer_id.toString() === CustomerId) {
+      if (this.Transactions[index].customer_id.toString() == CustomerId) {
         CustomerTransactionsDates.push({
           value: this.Transactions[index].amount,
           name: this.Transactions[index].date,

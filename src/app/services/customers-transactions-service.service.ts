@@ -16,10 +16,10 @@ export class CustomersTransactionsServiceService {
   ]);
   constructor(private _HttpClient: HttpClient) {}
   getCustomersData(): Observable<any> {
-    return this._HttpClient.get('http://localhost:3000/customers');
+    return this._HttpClient.get(`api/db.json`);
   }
 
   getTransactionsData(): Observable<any> {
-    return this._HttpClient.get('http://localhost:3000/transactions');
+    return this._HttpClient.get(`api/db.json`);
   }
 }
